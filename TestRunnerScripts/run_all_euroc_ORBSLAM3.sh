@@ -40,7 +40,7 @@ for folder in "$BASE_DIR"/*/; do
         sleep 5
 
         echo "📊 Starting resource logger..."
-        bash "$BASE_DIR/log_resources.sh" > "ORBSLAM3_log.csv" &
+        bash "$BASE_DIR/log_resources_ORBSLAM3.sh" > "ORBSLAM3_log.csv" &
         LOGGER_PID=$!
 
         echo "🎞️ Playing ROS2 bag: $BAG_PATH"

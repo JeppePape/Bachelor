@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BASE_DIR="/mnt/hgfs/Bags/ros1bags"
+LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 PLAYBACK_RATE=0.5
 source ~/Desktop/Vins-Mono/catkin_ws/devel/setup.bash
 
@@ -49,7 +50,7 @@ for folder in "$BASE_DIR"/*; do
     sleep 5
 
     echo "📊 Starting resource logger..."
-    bash "$BASE_DIR/log_resources_vins_mono.sh" &
+    bash "$LOG_DIR/log_resources_vins_mono.sh" &
     LOGGER_PID=$!
 
     echo "🎞️ Playing ROS1 bag: $BAG_PATH"

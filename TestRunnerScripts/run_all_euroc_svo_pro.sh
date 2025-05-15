@@ -1,5 +1,5 @@
 #!/bin/bash
-
+LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 BASE_DIR="/mnt/hgfs/Bags/ros1bags"
 PLAYBACK_RATE=0.5
 source ~/Desktop/svo_pro/svo_ws/devel/setup.bash
@@ -45,7 +45,7 @@ for folder in "$BASE_DIR"/*; do
     sleep 5
 
     echo "📊 Starting resource logger..."
-    bash "$BASE_DIR/log_resources_svo_pro.sh" &
+    bash "$LOG_DIR/log_resources_svo_pro.sh" &
     LOGGER_PID=$!
 
     echo "📈 Recording trajectory from /svo/pose_cam/0..."

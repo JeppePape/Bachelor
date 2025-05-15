@@ -2,6 +2,7 @@
 
 # Base directory containing each individual ROS 1 bag folder
 BASE_DIR="/mnt/hgfs/Bags/ros1bags"
+LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 
 # Path to VINS-Fusion config YAML
 CONFIG_YAML="/home/jeppe/Desktop/Vins-Fusion/catkin_ws/src/VINS-Fusion/config/euroc/euroc_mono_imu_config.yaml"
@@ -58,7 +59,7 @@ for folder in "$BASE_DIR"/*; do
     sleep 5
 
     echo "📊 Starting resource logger..."
-    bash "$BASE_DIR/log_resources_vins_fusion.sh" &
+    bash "$LOG_DIR/log_resources_vins_fusion.sh" &
     LOGGER_PID=$!
 
     echo "🎞️ Playing ROS1 bag: $BAG_PATH"

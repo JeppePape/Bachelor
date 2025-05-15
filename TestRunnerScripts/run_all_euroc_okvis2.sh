@@ -4,7 +4,7 @@
 OKVIS_BIN=~/Desktop/okvis2/build/okvis_app_synchronous
 CONFIG=~/Desktop/okvis2/config/euroc.yaml
 DATASET_ROOT=/mnt/hgfs/Bags/MavEurocFormat
-RESOURCE_LOGGER=/mnt/hgfs/Bags/MavEurocFormat/log_resources_okvis2.sh
+RESOURCE_LOGGER=/mnt/hgfs/Bags/TestRunnerScripts/log_resources_okvis2.sh
 LOG_NAME="OKVIS2_ASL_log.csv"
 .csv
 

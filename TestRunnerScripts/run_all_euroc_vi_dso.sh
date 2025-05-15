@@ -28,7 +28,7 @@ for folder in "$SHARED_DATASET_DIR"/*; do
     # Start resource logger
     ./log_resources_vi_dso.sh "$dataset" &
 
-    # Launch VI-DSO (user will manually stop it when done)
+    # Launch VI-DSO (will have to be manually stopped when done)
     "$VI_DSO_PATH/run_euroc.bash" "$dataset"
 
     # Move the output files if they were created

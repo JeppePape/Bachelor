@@ -4,17 +4,8 @@ import pandas as pd
 
 # ---------- Configurable datasets ----------
 datasets = [
-    "MH_01_easy",
-    "MH_02_easy",
-    "MH_03_medium",
-    "MH_04_difficult",
-    "MH_05_difficult",
-    "V1_01_easy",
-    "V1_02_medium",
-    "V1_03_difficult",
-    "V2_01_easy",
-    "V2_02_medium",
-    "V2_03_difficult"
+    "MH_01_easy","MH_02_easy","MH_03_medium","MH_04_difficult","MH_05_difficult","V1_01_easy","V1_02_medium","V1_03_difficult","V2_01_easy",
+    "V2_02_medium","V2_03_difficult"
 ]
 
 # ---------- Define all trajectory methods and their folder structure ----------
@@ -56,12 +47,7 @@ for dataset_name in datasets:
 
         # Build evo_ape command
         command = [
-            'evo_ape',
-            'euroc',
-            gt_file,
-            traj_file,
-            '--align',
-            '--no_warnings'
+            'evo_ape','euroc',gt_file,traj_file,'--align','--no_warnings'
         ]
 
         print(f"➡ Running: {' '.join(command)}")
