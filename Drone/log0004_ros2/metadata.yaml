@@ -1,0 +1,36 @@
+rosbag2_bagfile_information:
+  compression_format: ''
+  compression_mode: ''
+  custom_data: null
+  duration:
+    nanoseconds: 100485112448
+  files:
+  - duration:
+      nanoseconds: 100485112448
+    message_count: 105410
+    path: log0004_ros2.db3.db3
+    starting_time:
+      nanoseconds_since_epoch: 108298337889
+  message_count: 105410
+  relative_file_paths:
+  - log0004_ros2.db3.db3
+  ros_distro: rosbags
+  starting_time:
+    nanoseconds_since_epoch: 108298337889
+  storage_identifier: sqlite3
+  topics_with_message_count:
+  - message_count: 3013
+    topic_metadata:
+      name: /cam0/image_raw
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 102397
+    topic_metadata:
+      name: /imu0
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Imu
+      type_description_hash: RIHS01_7d9a00ff131080897a5ec7e26e315954b8eae3353c3f995c55faf71574000b5b
+  version: 8

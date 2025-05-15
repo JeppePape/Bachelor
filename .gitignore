@@ -1,0 +1,13 @@
+# Ignore all ROS2 bag database files
+*.db3
+
+# Ignore all ROS1 and ROS2 bag files
+*.bag
+
+# Ignore any folders named cam0, cam1, imu0, leica0, state_groundtruth_estimate0 regardless of location
+**/cam0/
+**/cam1/
+**/imu0/
+**/leica0/
+**/state_groundtruth_estimate0/
+**/pointcloud0/

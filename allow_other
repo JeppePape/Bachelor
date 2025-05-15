@@ -1,0 +1,8 @@
+--2025-05-06 03:23:46--  http://vmhgfs-fuse/
+Resolving vmhgfs-fuse (vmhgfs-fuse)... failed: Temporary failure in name resolution.
+wget: unable to resolve host address ‘vmhgfs-fuse’
+--2025-05-06 03:23:47--  ftp://.host//
+           => ‘.listing’
+Resolving .host (.host)... failed: Name or service not known.
+wget: unable to resolve host address ‘.host’
+/mnt/hgfs: Scheme missing.
