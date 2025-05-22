@@ -1,0 +1,77 @@
+%YAML:1.0
+
+File.version: "1.0"
+
+Camera.type: "PinHole"
+
+# Camera calibration and distortion parameters
+Camera1.fx: 576.246
+Camera1.fy: 574.404
+Camera1.cx: 619.398
+Camera1.cy: 396.725
+
+Camera1.k1: -0.3247272858176051
+Camera1.k2: 0.09935591920986149
+Camera1.p1: 0.00046215968702370
+Camera1.p2: 0.00128341037234520
+
+Camera.width: 1280
+Camera.height: 800
+
+Camera.newWidth: 1280
+Camera.newHeight: 800
+
+# Camera frames per second 
+Camera.fps: 29.97
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 1
+
+# Transformation from camera to body-frame (imu)
+IMU.T_b_c1: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: f
+   data:[0.00113902, -0.75731633,  0.65304723,  0.02546771
+         0.99998275, -0.00290039, -0.00510760,  0.0009338
+         0.00576216,  0.65304178,  0.75729996,  0.00876284
+         0.0, 0.0, 0.0, 1.0]
+
+# IMU noise
+IMU.NoiseGyro: 0.001
+IMU.NoiseAcc: 0.01
+IMU.GyroWalk: 0.001
+IMU.AccWalk: 0.001
+IMU.Frequency: 130.0
+
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 1000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid 	
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid	
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold	
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#---------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1.0
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2.0
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3.0
+Viewer.ViewpointX: 0.0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -1.8
+Viewer.ViewpointF: 500.0
