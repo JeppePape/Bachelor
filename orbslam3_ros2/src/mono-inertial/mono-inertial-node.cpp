@@ -4,18 +4,15 @@
 
 using std::placeholders::_1;
 
-// Max buffer size to prevent memory overflow
-const int MAX_BUFFER_SIZE = 5000;
-
 MonoInertialNode::MonoInertialNode(ORB_SLAM3::System* pSLAM)
     : Node("ORB_SLAM3_ROS2"), 
     SLAM_(pSLAM), 
     syncThread_(new std::thread(&MonoInertialNode::SyncWithImu, this))
 {
     m_image_subscriber = this->create_subscription<sensor_msgs::msg::Image>(
-        "camera", 300, std::bind(&MonoInertialNode::GrabImage, this, _1));
+        "camera", 100, std::bind(&MonoInertialNode::GrabImage, this, _1));
 
-    rclcpp::QoS imu_qos = rclcpp::QoS(rclcpp::KeepLast(3000)).best_effort();
+    rclcpp::QoS imu_qos = rclcpp::QoS(rclcpp::KeepLast(1000)).best_effort();
     subImu_ = this->create_subscription<sensor_msgs::msg::Imu>(
         "imu", imu_qos, std::bind(&MonoInertialNode::GrabImu, this, _1));
 }
@@ -26,7 +23,6 @@ MonoInertialNode::~MonoInertialNode()
         syncThread_->join();
         delete syncThread_;
     }
-    SLAM_->SaveKeyFrameTrajectoryEuRoC("OrbSlam3EuRoC.txt");
     SLAM_->SaveKeyFrameTrajectoryTUM("OrbSlam3TUM.txt");
 }
 
@@ -73,9 +69,9 @@ void MonoInertialNode::GrabImage(const sensor_msgs::msg::Image::SharedPtr msg)
         imgBuf_.push(msg);
 
         // Prevent buffer overflow
-        if (imgBuf_.size() > MAX_BUFFER_SIZE) {
-            imgBuf_.pop();
-        }
+        // if (imgBuf_.size() > MAX_BUFFER_SIZE) {
+        //     imgBuf_.pop();
+        // }
     }
 }
 
@@ -88,9 +84,9 @@ void MonoInertialNode::GrabImu(const sensor_msgs::msg::Imu::SharedPtr msg)
     //std::cout << "📡 IMU Timestamp: " << imu_time << std::endl;
 
     // Log to file
-    std::ofstream logFile("/home/jeppe/imu_log.txt", std::ios::app);
-    logFile << std::fixed << std::setprecision(9) << imu_time << std::endl;
-    logFile.close();
+    // std::ofstream logFile("/home/jeppe/imu_log.txt", std::ios::app);
+    // logFile << std::fixed << std::setprecision(9) << imu_time << std::endl;
+    // logFile.close();
 
     {
         std::lock_guard<std::mutex> lock(bufMutex_);
@@ -107,9 +103,9 @@ void MonoInertialNode::GrabImu(const sensor_msgs::msg::Imu::SharedPtr msg)
         }
 
         // Prevent buffer overflow
-        if (imuBuf_.size() > MAX_BUFFER_SIZE) {
-            imuBuf_.pop();
-        }
+        // if (imuBuf_.size() > MAX_BUFFER_SIZE) {
+        //     imuBuf_.pop();
+        // }
     }
 }
 
@@ -129,7 +125,7 @@ void MonoInertialNode::SyncWithImu()
 {
     const double maxTimeDiff = 0.1;  // Maximum time difference between images and IMU
     const double imuTimeWindow = 1.0; // Keep IMU data within ±1 second of the image
-    const double imuMaxAge = 20.0;    // Maximum IMU message age before deletion
+    const double imuMaxAge = 2.0;    // Maximum IMU message age before deletion
     const double maxImageAheadTime = 2.0; // Maximum Image age
 
     while (rclcpp::ok())

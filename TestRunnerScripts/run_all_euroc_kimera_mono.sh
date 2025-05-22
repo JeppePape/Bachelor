@@ -4,7 +4,7 @@ source ~/Desktop/Bachelor/KIMERA/catkin_ws/devel/setup.bash
 roscore &
 sleep 5
 
-LOG_SCRIPT="/mnt/hgfs/Bags/ros1bags/log_resources_KIMERA.sh"
+LOG_SCRIPT="/mnt/hgfs/Bags/TestRunnerScripts/log_resources_KIMERA.sh"
 OUTPUT_DIR="/home/jeppe/Desktop/Bachelor/KIMERA/catkin_ws/src/Kimera-VIO-ROS/output_logs/EurocMono"
 
 for folder in /mnt/hgfs/Bags/ros1bags/*; do
@@ -32,11 +32,11 @@ for folder in /mnt/hgfs/Bags/ros1bags/*; do
             sleep 5
 
             # Start resource logger
-            bash "$LOG_SCRIPT" &
+            bash "$LOG_SCRIPT" "$folder/KIMERA_ROS1_log.csv" &
             logger_pid=$!
 
             # Play rosbag in background
-            rosbag play --clock "$bagfile" &
+            rosbag play --clock --rate=0.5 -s 13 "$bagfile" &
             bag_pid=$!
 
             # Wait for rosbag to finish
@@ -56,7 +56,7 @@ for folder in /mnt/hgfs/Bags/ros1bags/*; do
             # Check if output was created
             if [[ -f "$OUTPUT_DIR/traj_vio.csv" ]]; then
                 mv "$OUTPUT_DIR/traj_vio.csv" "$folder/KIMERA_traj.csv"
-                mv "/mnt/hgfs/Bags/ros1bags/KIMERA_ROS1_log.csv" "$folder/KIMERA_ROS1_log.csv" 2>/dev/null
+                mv "/mnt/hgfs/Bags/TestRunnerScripts/KIMERA_ROS1_log.csv" "$folder/KIMERA_ROS1_log.csv" 2>/dev/null
                 echo "✔ Done: $folder"
                 break
             else

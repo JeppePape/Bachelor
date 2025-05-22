@@ -2,6 +2,7 @@
 
 # Path to all your bag folders
 BASE_DIR="/mnt/hgfs/Bags/Ros2Bags"
+LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 
 # Path to vocabulary and settings
 VOCAB="$HOME/Desktop/Bachelor/colcon_ws/src/orbslam3_ros2/vocabulary/ORBvoc.txt"
@@ -11,7 +12,7 @@ YAML="$HOME/Desktop/Bachelor/ORB_SLAM3/Examples/Monocular-Inertial/EuRoC.yaml"
 SLAM_CMD="ros2 run orbslam3 mono-inertial $VOCAB $YAML --ros-args --remap camera:=/cam0/image_raw --remap imu:=/imu0"
 
 # Playback rate
-BAG_RATE=0.3
+BAG_RATE=0.5
 
 for folder in "$BASE_DIR"/*/; do
     echo "🔁 Processing folder: $folder"
@@ -40,11 +41,11 @@ for folder in "$BASE_DIR"/*/; do
         sleep 5
 
         echo "📊 Starting resource logger..."
-        bash "$BASE_DIR/log_resources_ORBSLAM3.sh" > "ORBSLAM3_log.csv" &
+        bash "$LOG_DIR/log_resources_ORBSLAM3.sh" > "ORBSLAM3_log.csv" &
         LOGGER_PID=$!
 
         echo "🎞️ Playing ROS2 bag: $BAG_PATH"
-        ros2 bag play "$BAG_PATH" --rate $BAG_RATE &
+        ros2 bag play "$BAG_PATH" --rate $BAG_RATE --start-offset 5 &
         BAG_PID=$!
 
         # Monitor bag and ORB-SLAM3 processes
@@ -78,12 +79,17 @@ for folder in "$BASE_DIR"/*/; do
         fi
     done
 
-    # Move result files to the folder
-    for f in OrbSlam3TUM.txt OrbSlam3EuRoC.txt OrbSlam3KITTI.txt ORBSLAM3_log.csv; do
-        if [ -f "$f" ]; then
-            mv "$f" "$folder/"
-        fi
-    done
+# Move result files to the folder
+for f in OrbSlam3TUM.txt OrbSlam3EuRoC.txt OrbSlam3KITTI.txt; do
+    if [ -f "$f" ]; then
+        mv "$f" "$folder/"
+    fi
+done
+
+# Move ORBSLAM3_log.csv from LOG_DIR to the folder
+if [ -f "$LOG_DIR/ORBSLAM3_log.csv" ]; then
+    mv "$LOG_DIR/ORBSLAM3_log.csv" "$folder/"
+fi
 done
 
 echo "🏁 All bags processed."

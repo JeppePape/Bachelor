@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BASE_DIR="/mnt/hgfs/Bags/ros1bags"
+LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 PLAYBACK_RATE=1
 source ~/Desktop/R-VIO/catkin_ws/devel/setup.bash
 
@@ -56,7 +57,7 @@ for folder in "$BASE_DIR"/*; do
     sleep 5
 
     echo "📊 Starting resource logger..."
-    bash "$BASE_DIR/log_resources_rvio.sh" &
+    bash "$LOG_DIR/log_resources_rvio.sh" &
     LOGGER_PID=$!
 
     echo "📈 Recording odometry to CSV..."
@@ -64,7 +65,7 @@ for folder in "$BASE_DIR"/*; do
     RECORD_PID=$!
 
     echo "🎞️ Playing ROS1 bag: $BAG_PATH"
-    rosbag play "$BAG_PATH" --clock --rate $PLAYBACK_RATE /cam0/image_raw:=/camera/image_raw /imu0:=/imu &
+    rosbag play "$BAG_PATH" --clock --rate $PLAYBACK_RATE  -s 0  /cam0/image_raw:=/camera/image_raw /imu0:=/imu &
     BAG_PID=$!
 
     wait $BAG_PID
@@ -85,7 +86,7 @@ for folder in "$BASE_DIR"/*; do
 
     echo "📁 Moving output files..."
     [ -f "$BASE_DIR/rvio_trajectory.csv" ] && mv "$BASE_DIR/rvio_trajectory.csv" "$folder/rvio_trajectory.csv"
-    [ -f "$BASE_DIR/RVIO_ROS1_log.csv" ] && mv "$BASE_DIR/RVIO_ROS1_log.csv" "$folder/RVIO_ROS1_log.csv"
+    [ -f "$LOG_DIR/RVIO_ROS1_log.csv" ] && mv "$LOG_DIR/RVIO_ROS1_log.csv" "$folder/RVIO_ROS1_log.csv"
 
 done
 
