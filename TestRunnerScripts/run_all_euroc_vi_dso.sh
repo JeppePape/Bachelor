@@ -25,20 +25,27 @@ for folder in "$SHARED_DATASET_DIR"/*; do
 
     echo ">>> Running VI-DSO on dataset: $dataset"
 
-    # Start resource logger
+    # Start resource logger in background
     ./log_resources_vi_dso.sh "$dataset" &
+    LOGGER_PID=$!
 
-    # Launch VI-DSO (will have to be manually stopped when done)
+    # Change to dataset directory and run VI-DSO
+    cd "$SHARED_DATASET_DIR"
     "$VI_DSO_PATH/run_euroc.bash" "$dataset"
 
-    # Move the output files if they were created
+    # Kill the resource logger
+    echo "🧹 Stopping logger for $dataset (PID: $LOGGER_PID)..."
+    kill -INT "$LOGGER_PID"
+    timeout 10s wait "$LOGGER_PID" || kill -9 "$LOGGER_PID"
+
+    # Move output files
     src_traj_file="$DATA_DIR/nt_${dataset}.txt"
     if [ -f "$src_traj_file" ]; then
         mv "$src_traj_file" "$folder/mav0/"
     fi
 
-    if [ -f "$SHARED_DATASET_DIR/$RESOURCE_LOG" ]; then
-        mv "$SHARED_DATASET_DIR/$RESOURCE_LOG" "$folder/mav0/"
+    if [ -f "$SHARED_DATASET_DIR/../TestRunnerScripts/$RESOURCE_LOG" ]; then
+        mv "$SHARED_DATASET_DIR/../TestRunnerScripts/$RESOURCE_LOG" "$folder/mav0/"
     fi
 
     echo ">>> Finished $dataset"

@@ -8,7 +8,7 @@ LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 CONFIG_YAML="/home/jeppe/Desktop/Vins-Fusion/catkin_ws/src/VINS-Fusion/config/euroc/euroc_mono_imu_config.yaml"
 
 # Playback rate
-BAG_RATE=0.3
+BAG_RATE=0.5
 
 # Source VINS-Fusion environment
 source /home/jeppe/Desktop/Vins-Fusion/catkin_ws/devel/setup.bash
@@ -63,7 +63,7 @@ for folder in "$BASE_DIR"/*; do
     LOGGER_PID=$!
 
     echo "🎞️ Playing ROS1 bag: $BAG_PATH"
-    rosbag play "$BAG_PATH" --rate $BAG_RATE &
+    rosbag play "$BAG_PATH" --rate $BAG_RATE -s 4 &
     BAG_PID=$!
 
     wait $BAG_PID
@@ -76,7 +76,7 @@ for folder in "$BASE_DIR"/*; do
     timeout 10s wait $LOGGER_PID || kill -9 $LOGGER_PID
 
     echo "📁 Moving output files to $folder..."
-    [ -f "$BASE_DIR/Vins_fusion_ROS1_log.csv" ] && mv "$BASE_DIR/Vins_fusion_ROS1_log.csv" "$folder/VINS_FUSION_log.csv"
+    [ -f "$LOG_DIR/Vins_fusion_ROS1_log.csv" ] && mv "$LOG_DIR/Vins_fusion_ROS1_log.csv" "$folder/VINS_FUSION_log.csv"
     [ -f "$BASE_DIR/vio.csv" ] && mv "$BASE_DIR/vio.csv" "$folder/vins_fusion_trajectory.csv"
 
 done
