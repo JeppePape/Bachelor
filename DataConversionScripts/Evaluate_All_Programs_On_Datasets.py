@@ -19,6 +19,8 @@ methods = [
     {"name": "VI-Stereo-DSO", "folder": "MavEurocFormat", "file": "mav0/nt_{dataset}.txt", "log_file": "VIDSO_ASL_log.csv"},
     {"name": "OKVIS2", "folder": "MavEurocFormat", "file": "mav0/tum_okvis2.txt", "log_file": "OKVIS2_ASL_log.csv"},
     {"name": "RVIO", "folder": "ros1bags", "file": "tum_rvio.txt", "log_file": "RVIO_ROS1_log.csv"},
+    {"name": "ORB-SLAM3_2", "folder": "ros2bags", "file": "OrbSlam3TUM_mono2.txt", "log_file": "ORBSLAM3_log_mono2.csv"},
+    {"name": "ORB-SLAM3_3", "folder": "ros2bags", "file": "OrbSlam3TUM_mono3.txt", "log_file": "ORBSLAM3_log_mono3.csv"},
 ]
 
 # ---------- Output CSV ----------

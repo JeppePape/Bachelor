@@ -9,10 +9,10 @@ VOCAB="$HOME/Desktop/Bachelor/colcon_ws/src/orbslam3_ros2/vocabulary/ORBvoc.txt"
 YAML="$HOME/Desktop/Bachelor/ORB_SLAM3/Examples/Monocular-Inertial/EuRoC.yaml"
 
 # SLAM executable
-SLAM_CMD="ros2 run orbslam3 mono-inertial $VOCAB $YAML --ros-args --remap camera:=/cam0/image_raw --remap imu:=/imu0"
+SLAM_CMD="ros2 run orbslam3 mono-inertial2 $VOCAB $YAML --ros-args --remap camera:=/cam0/image_raw --remap imu:=/imu0"
 
 # Playback rate
-BAG_RATE=0.3
+BAG_RATE=0.2
 
 for folder in "$BASE_DIR"/*/; do
     echo "🔁 Processing folder: $folder"
@@ -20,7 +20,7 @@ for folder in "$BASE_DIR"/*/; do
     BAG_PATH="$folder/$BAG_NAME.db3"
     LOG_PATH="$folder/ORBSLAM3_log.csv"
 
-    if [ -f "$folder/OrbSlam3TUM.txt" ]; then
+    if [ -f "$folder/OrbSlam3TUM_mono2.txt" ]; then
         echo "⚡ Trajectory already exists, skipping $BAG_NAME."
         continue
     fi
@@ -80,15 +80,15 @@ for folder in "$BASE_DIR"/*/; do
     done
 
 # Move result files to the folder
-for f in OrbSlam3TUM.txt OrbSlam3EuRoC.txt OrbSlam3KITTI.txt; do
+for f in OrbSlam3TUM.txt; do
     if [ -f "$f" ]; then
-        mv "$f" "$folder/"
+        mv "$f" "$folder/OrbSlam3TUM_mono2.txt"
     fi
 done
 
 # Move ORBSLAM3_log.csv from LOG_DIR to the folder
 if [ -f "$LOG_DIR/ORBSLAM3_log.csv" ]; then
-    mv "$LOG_DIR/ORBSLAM3_log.csv" "$folder/"
+    mv "$LOG_DIR/ORBSLAM3_log.csv" "$folder/ORBSLAM3_log_mono2.csv"
 fi
 done
 
