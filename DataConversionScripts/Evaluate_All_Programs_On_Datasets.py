@@ -90,15 +90,15 @@ for dataset_name in datasets:
                     avg_mem = log_df.iloc[:, 2].mean()
 
                     result['avg_cpu (%)'] = round(avg_cpu, 2)
-                    result['avg_mem (MB)'] = round(avg_mem, 2)
+                    result['avg_mem (%)'] = round(avg_mem, 2)
                 except Exception as e:
                     print(f"❌ Error reading log file {log_file}: {e}")
                     result['avg_cpu (%)'] = 'N/A'
-                    result['avg_mem (MB)'] = 'N/A'
+                    result['avg_mem (%)'] = 'N/A'
             else:
                 print(f"⚠️ Log file not found: {log_file}")
                 result['avg_cpu (%)'] = 'N/A'
-                result['avg_mem (MB)'] = 'N/A'        
+                result['avg_mem (%)'] = 'N/A'
 
             # Append to global CSV
             df = pd.read_csv(output_csv)
