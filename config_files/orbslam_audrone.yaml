@@ -22,7 +22,7 @@ Camera.newWidth: 1280
 Camera.newHeight: 800
 
 # Camera frames per second 
-Camera.fps: 29.97
+Camera.fps: 30
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -42,7 +42,7 @@ IMU.NoiseGyro: 0.001
 IMU.NoiseAcc: 0.01
 IMU.GyroWalk: 0.001
 IMU.AccWalk: 0.001
-IMU.Frequency: 130.0
+IMU.Frequency: 1024.0
 
 
 #--------------------------------------------------------------------------------------------

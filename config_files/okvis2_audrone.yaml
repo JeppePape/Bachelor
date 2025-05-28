@@ -37,7 +37,7 @@ imu_parameters:
     g: 9.80665 # Earth's acceleration due to gravity [m/s^2]
     g0: [ 0.0, 0.0, 0.0 ] # initial gyro bias [rad/s]
     a0: [ 0.0, 0.0, 0.0 ] # initial accelerometer bias [m/s^2]
-    imu_rate: 130
+    imu_rate: 1024
     # transform Body-Sensor (IMU)
     T_BS:
         [1.0000, 0.0000, 0.0000, 0.0000,
