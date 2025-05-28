@@ -5,7 +5,7 @@
 using std::placeholders::_1;
 
 MonocularInertialNode::MonocularInertialNode(ORB_SLAM3::System* pSLAM)
-:   Node("ORB_SLAM3_ROS2")
+:   Node("mono_inertial_node2")
 {
     m_SLAM = pSLAM;
     m_image_subscriber = this->create_subscription<ImageMsg>(

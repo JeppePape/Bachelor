@@ -19,6 +19,8 @@ methods = [
     {"name": "VI-Stereo-DSO", "folder": "MavEurocFormat", "file": "mav0/nt_{dataset}.txt", "log_file": "VIDSO_ASL_log.csv"},
     {"name": "OKVIS2", "folder": "MavEurocFormat", "file": "mav0/tum_okvis2.txt", "log_file": "OKVIS2_ASL_log.csv"},
     {"name": "RVIO", "folder": "ros1bags", "file": "tum_rvio.txt", "log_file": "RVIO_ROS1_log.csv"},
+    {"name": "ORB-SLAM3_2", "folder": "ros2bags", "file": "OrbSlam3TUM_mono2.txt", "log_file": "ORBSLAM3_log_mono2.csv"},
+    {"name": "ORB-SLAM3_3", "folder": "ros2bags", "file": "OrbSlam3TUM_mono3.txt", "log_file": "ORBSLAM3_log_mono3.csv"},
 ]
 
 # ---------- Output CSV ----------
@@ -88,15 +90,15 @@ for dataset_name in datasets:
                     avg_mem = log_df.iloc[:, 2].mean()
 
                     result['avg_cpu (%)'] = round(avg_cpu, 2)
-                    result['avg_mem (MB)'] = round(avg_mem, 2)
+                    result['avg_mem (%)'] = round(avg_mem, 2)
                 except Exception as e:
                     print(f"❌ Error reading log file {log_file}: {e}")
                     result['avg_cpu (%)'] = 'N/A'
-                    result['avg_mem (MB)'] = 'N/A'
+                    result['avg_mem (%)'] = 'N/A'
             else:
                 print(f"⚠️ Log file not found: {log_file}")
                 result['avg_cpu (%)'] = 'N/A'
-                result['avg_mem (MB)'] = 'N/A'        
+                result['avg_mem (%)'] = 'N/A'
 
             # Append to global CSV
             df = pd.read_csv(output_csv)

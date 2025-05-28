@@ -12,7 +12,7 @@ YAML="$HOME/Desktop/Bachelor/ORB_SLAM3/Examples/Monocular-Inertial/EuRoC.yaml"
 SLAM_CMD="ros2 run orbslam3 mono-inertial $VOCAB $YAML --ros-args --remap camera:=/cam0/image_raw --remap imu:=/imu0"
 
 # Playback rate
-BAG_RATE=0.5
+BAG_RATE=0.3
 
 for folder in "$BASE_DIR"/*/; do
     echo "🔁 Processing folder: $folder"

@@ -65,7 +65,7 @@ for folder in "$BASE_DIR"/*; do
     RECORD_PID=$!
 
     echo "🎞️ Playing ROS1 bag: $BAG_PATH"
-    rosbag play "$BAG_PATH" --clock --rate $PLAYBACK_RATE  -s 0  /cam0/image_raw:=/camera/image_raw /imu0:=/imu &
+    rosbag play "$BAG_PATH" --clock --rate $PLAYBACK_RATE  -s 0.5  /cam0/image_raw:=/camera/image_raw /imu0:=/imu &
     BAG_PID=$!
 
     wait $BAG_PID

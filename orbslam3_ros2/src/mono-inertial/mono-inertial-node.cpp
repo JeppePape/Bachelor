@@ -5,7 +5,7 @@
 using std::placeholders::_1;
 
 MonoInertialNode::MonoInertialNode(ORB_SLAM3::System* pSLAM)
-    : Node("ORB_SLAM3_ROS2"), 
+    : Node("mono_inertial_node1"), 
     SLAM_(pSLAM), 
     syncThread_(new std::thread(&MonoInertialNode::SyncWithImu, this))
 {
