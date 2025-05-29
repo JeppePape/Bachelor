@@ -42,7 +42,7 @@ IMU.NoiseGyro: 0.001
 IMU.NoiseAcc: 0.01
 IMU.GyroWalk: 0.001
 IMU.AccWalk: 0.001
-IMU.Frequency: 1000.0
+IMU.Frequency: 1024.0
 
 
 #--------------------------------------------------------------------------------------------
