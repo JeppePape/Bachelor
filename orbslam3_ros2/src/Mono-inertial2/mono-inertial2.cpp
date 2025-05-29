@@ -4,7 +4,7 @@
 #include <chrono>
 
 #include "rclcpp/rclcpp.hpp"
-#include "monocular-inertial-node.hpp"
+#include "mono-inertial-node2.hpp"
 
 #include "System.h"
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 
     // malloc error using new.. try shared ptr
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
-    bool visualization = true;
+    bool visualization = false;
     ORB_SLAM3::System pSLAM(argv[1], argv[2], ORB_SLAM3::System::IMU_MONOCULAR, visualization);
 
     auto node = std::make_shared<MonocularInertialNode>(&pSLAM);

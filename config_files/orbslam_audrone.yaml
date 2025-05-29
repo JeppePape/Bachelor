@@ -22,7 +22,7 @@ Camera.newWidth: 1280
 Camera.newHeight: 800
 
 # Camera frames per second 
-Camera.fps: 29.97
+Camera.fps: 30
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -32,9 +32,9 @@ IMU.T_b_c1: !!opencv-matrix
    rows: 4
    cols: 4
    dt: f
-   data:[0.00113902, -0.75731633,  0.65304723,  0.02546771
-         0.99998275, -0.00290039, -0.00510760,  0.0009338
-         0.00576216,  0.65304178,  0.75729996,  0.00876284
+   data:[0.00113902, -0.75731633,  0.65304723,  0.02546771,
+         0.99998275, -0.00290039, -0.00510760,  0.0009338,
+         0.00576216,  0.65304178,  0.75729996,  0.00876284,
          0.0, 0.0, 0.0, 1.0]
 
 # IMU noise
@@ -42,7 +42,7 @@ IMU.NoiseGyro: 0.001
 IMU.NoiseAcc: 0.01
 IMU.GyroWalk: 0.001
 IMU.AccWalk: 0.001
-IMU.Frequency: 130.0
+IMU.Frequency: 1000.0
 
 
 #--------------------------------------------------------------------------------------------

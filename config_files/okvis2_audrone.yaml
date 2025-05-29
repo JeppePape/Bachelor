@@ -2,9 +2,9 @@
 cameras:
      - {T_SC:
         [0.00113902, -0.75731633,  0.65304723,  0.02546771,
-         0.99998275, -0.00290039, -0.00510760,  0.0009338,
-         0.00576216,  0.65304178,  0.75729996,  0.00876284,
-         0.0, 0.0, 0.0, 1.0],
+            0.99998275, -0.00290039, -0.00510760,  0.0009338,
+            0.00576216,  0.65304178,  0.75729996,  0.00876284,
+            0.0, 0.0, 0.0, 1.0],
         image_dimension: [1280, 800],
         distortion_coefficients: [-0.3247, 0.0993, 0.0004, 0.0012],
         distortion_type: radialtangential,
@@ -37,7 +37,7 @@ imu_parameters:
     g: 9.80665 # Earth's acceleration due to gravity [m/s^2]
     g0: [ 0.0, 0.0, 0.0 ] # initial gyro bias [rad/s]
     a0: [ 0.0, 0.0, 0.0 ] # initial accelerometer bias [m/s^2]
-    imu_rate: 130
+    imu_rate: 1000
     # transform Body-Sensor (IMU)
     T_BS:
         [1.0000, 0.0000, 0.0000, 0.0000,
@@ -53,7 +53,7 @@ frontend_parameters:
     octaves: 0 # number of octaves for detection. 0 means single-scale at highest resolution
     max_num_keypoints: 700 # restrict to a maximum of this many keypoints per image (strongest ones)
     keyframe_overlap: 0.60 # minimum field-of-view overlap
-    use_cnn: true # use the CNN (if available) to filter out dynamic content / sky
+    use_cnn: false # use the CNN (if available) to filter out dynamic content / sky
     parallelise_detection: true # Run parallel detect & describe.
     num_matching_threads: 4 # Parallelise matching with this number of threads.
 
@@ -62,15 +62,15 @@ estimator_parameters:
     num_keyframes: 5 # number of keyframes in optimisation window
     num_loop_closure_frames: 3 # number of loop closure frames in optimisation window
     num_imu_frames: 3 # number of frames linked by most recent nonlinear IMU error terms
-    do_loop_closures: false # whether to do VI-SLAM or VIO
+    do_loop_closures: true # whether to do VI-SLAM or VIO
     do_final_ba: false # Whether to run a full final BA
     enforce_realtime: false # whether to limit the time budget for optimisation
     realtime_min_iterations: 3 # minimum number of iterations always performed
     realtime_max_iterations: 10 # never do more than these, even if not converged
     realtime_time_limit: 0.035 # time budget for realtime optimisation [s]
-    realtime_num_threads: 4 # number of threads for the realtime optimisation
+    realtime_num_threads: 3 # number of threads for the realtime optimisation
     full_graph_iterations: 15 # don't do more than these for the full (background) optimisation
-    full_graph_num_threads: 4 # number of threads for the full (background) optimisation
+    full_graph_num_threads: 3 # number of threads for the full (background) optimisation
 
 # some options for how and what to output
 output_parameters:

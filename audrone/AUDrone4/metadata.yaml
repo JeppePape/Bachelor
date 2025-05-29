@@ -1,0 +1,36 @@
+rosbag2_bagfile_information:
+  compression_format: ''
+  compression_mode: ''
+  custom_data: {}
+  duration:
+    nanoseconds: 90503894585
+  files:
+  - duration:
+      nanoseconds: 90503894585
+    message_count: 94875
+    path: AUDrone4.db3
+    starting_time:
+      nanoseconds_since_epoch: 897683937423
+  message_count: 94875
+  relative_file_paths:
+  - AUDrone4.db3
+  ros_distro: rosbags
+  starting_time:
+    nanoseconds_since_epoch: 897683937423
+  storage_identifier: sqlite3
+  topics_with_message_count:
+  - message_count: 2714
+    topic_metadata:
+      name: /cam0/image_raw
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Image
+      type_description_hash: RIHS01_d31d41a9a4c4bc8eae9be757b0beed306564f7526c88ea6a4588fb9582527d47
+  - message_count: 92161
+    topic_metadata:
+      name: /imu0
+      offered_qos_profiles: ''
+      serialization_format: cdr
+      type: sensor_msgs/msg/Imu
+      type_description_hash: RIHS01_7d9a00ff131080897a5ec7e26e315954b8eae3353c3f995c55faf71574000b5b
+  version: 8
