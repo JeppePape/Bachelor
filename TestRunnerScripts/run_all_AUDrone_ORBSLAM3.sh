@@ -1,23 +1,24 @@
 #!/bin/bash
 
 # Path to all your bag folders
-BASE_DIR="/mnt/hgfs/Bags/Ros2Bags"
+BASE_DIR="/mnt/hgfs/Bags/audrone"
+LOG_DIR="/mnt/hgfs/Bags/TestRunnerScripts"
 
 # Path to vocabulary and settings
 VOCAB="$HOME/Desktop/Bachelor/colcon_ws/src/orbslam3_ros2/vocabulary/ORBvoc.txt"
-YAML="/mnt/hgfs/Bags/AuDrone.yaml"
+YAML="/mnt/hgfs/Bags/config_files/orbslam_audrone.yaml"
 
 # SLAM executable
 SLAM_CMD="ros2 run orbslam3 mono-inertial $VOCAB $YAML --ros-args --remap camera:=/cam0/image_raw --remap imu:=/imu0"
 
 # Playback rate
-BAG_RATE=0.3
+BAG_RATE=0.2
 
-for folder in "$BASE_DIR"/*_ros2; do
+for folder in $BASE_DIR/*; do
     echo "🔁 Processing folder: $folder"
     BAG_NAME=$(basename "$folder")
     BAG_PATH="$folder/$BAG_NAME.db3"
-    LOG_PATH="$folder/ORBSLAM3_ROS2_log.csv"
+    LOG_PATH="$folder/ORBSLAM3_log.csv"
 
     if [ -f "$folder/OrbSlam3TUM.txt" ]; then
         echo "⚡ Trajectory already exists, skipping $BAG_NAME."
@@ -40,7 +41,7 @@ for folder in "$BASE_DIR"/*_ros2; do
         sleep 5
 
         echo "📊 Starting resource logger..."
-        bash "$BASE_DIR/log_resources.sh" > "ORBSLAM3_ROS2_log.csv" &
+        bash "$LOG_DIR/log_resources_ORBSLAM3.sh" > "ORBSLAM3_log.csv" &
         LOGGER_PID=$!
 
         echo "🎞️ Playing ROS2 bag: $BAG_PATH"
@@ -79,7 +80,7 @@ for folder in "$BASE_DIR"/*_ros2; do
     done
 
     # Move result files to the folder
-    for f in OrbSlam3TUM.txt OrbSlam3EuRoC.txt OrbSlam3KITTI.txt ORBSLAM3_ROS2_log.csv; do
+    for f in OrbSlam3TUM.txt ORBSLAM3_log.csv; do
         if [ -f "$f" ]; then
             mv "$f" "$folder/"
         fi
